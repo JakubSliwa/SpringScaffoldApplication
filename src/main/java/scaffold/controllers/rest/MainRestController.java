@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scaffold.controllers.main.InputFormBean;
 import scaffold.data.dao.TestEntityDao;
+import scaffold.data.dao.springdata.TestDao;
 import scaffold.data.entity.TestEntity;
 
 import javax.inject.Inject;
@@ -17,8 +18,10 @@ public class MainRestController {
 
     @Inject
     private TestEntityDao testEntityDao;
+    @Inject
+    private TestDao testDao;
 
-    @RequestMapping(value = "/add",  method = RequestMethod.PUT)
+    @RequestMapping(value = "/add", method = RequestMethod.PUT)
     public void addNewEntry(@RequestBody InputFormBean inputBean) {
         TestEntity newEntity = new TestEntity();
         newEntity.setName(inputBean.getName());
@@ -28,5 +31,10 @@ public class MainRestController {
     @RequestMapping(value = "/out", method = RequestMethod.GET)
     private List<TestEntity> getAllData() {
         return testEntityDao.getAll();
+    }
+
+    @RequestMapping(value = "/out2", method = RequestMethod.GET)
+    private Iterable<TestEntity> getAllDataViaSpringData() {
+        return testDao.findAll();
     }
 }

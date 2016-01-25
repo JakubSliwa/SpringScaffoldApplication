@@ -6,6 +6,9 @@
         <ul class="nav navbar-nav">
             <li><a href="/">Add</a></li>
             <li><a href="/out">Display</a></li>
+            <li><a href="/out2">Display via Spring-Data</a></li>
+            <li><a href="/rest/out">Get as JSON</a></li>
+            <li><a href="/rest/out2">Get as JSON via Spring-Data</a></li>
         </ul>
     </div>
 </div>

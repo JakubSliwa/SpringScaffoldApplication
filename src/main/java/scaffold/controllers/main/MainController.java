@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import scaffold.data.dao.TestEntityDao;
+import scaffold.data.dao.springdata.TestDao;
 import scaffold.data.entity.TestEntity;
 
 import javax.inject.Inject;
@@ -17,13 +18,15 @@ public class MainController {
 
     @Inject
     private TestEntityDao testEntityDao;
+    @Inject
+    private TestDao testDao;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView displayForm(@ModelAttribute("inputBean") InputFormBean inputBean) {
         return new ModelAndView("main");
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public ModelAndView addNewEntry(@ModelAttribute("inputBean") InputFormBean inputBean) {
 		TestEntity newEntity = new TestEntity();
 		newEntity.setName(inputBean.getName());
@@ -31,10 +34,18 @@ public class MainController {
         return displayForm(inputBean);
     }
 
-    @RequestMapping(value = "/out", method = RequestMethod.GET)
+    @RequestMapping(value = "out", method = RequestMethod.GET)
     private ModelAndView displayAllData() {
         ModelAndView mav = new ModelAndView("display");
         List<TestEntity> allData = testEntityDao.getAll();
+        mav.addObject("data", allData);
+        return mav;
+    }
+
+    @RequestMapping(value = "out2", method = RequestMethod.GET)
+    private ModelAndView displayAllDataViaSpringData() {
+        ModelAndView mav = new ModelAndView("display");
+        Iterable<TestEntity> allData = testDao.findAll();
         mav.addObject("data", allData);
         return mav;
     }
