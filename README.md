@@ -7,3 +7,7 @@ It is rather simplistic, but contains some useful configuration items:
 - By default data source is set to file HSQL database which will be created in CWD after application is run.
 
 Because of the last two points, this scaffold application can be run without any need for additional configuration -> user only needs to have Java JRE and can run a webapplication.
+
+Of course someone could argue that there is no point in a project like this, since we have Spring Boot that provides pretty much the same out-of-the-box. There difference, however, is that this stub provides full control over the project configuration, whereas Spring Boot hides the configs. 
+
+If you need a simple out-of-the-box implementation then Spring Boot might be a good choice. However, if you intend to override the defaults and provide your own configuration, then it might be easier to start with this stub.
